@@ -1,15 +1,15 @@
 ##### RESOURCES
 resource "aws_instance" "meu_servidor" {
-  
+
   # USANDO for_each NO LUGAR DE count
   #count = 3
-  
+
   # META-ARGUMENT USADO NO LUGAR DO count ACIMA
   for_each = {
     fruit = "apple"
     vechicle = "car"
     continent = "Europe"
-  }  
+  }
 
   provider = aws.aws_east
   ami = var.ami
@@ -23,10 +23,10 @@ resource "aws_instance" "meu_servidor" {
 
   tags = {
 
-    # USAR ASSIM É ESTÁTICO
-    name = "MinhaEC2viaTerraform"
-    
+    # ESTÁTICO
+    #name = "MinhaEC2viaTerraform"
+
     # USANDO O for_each
-    #name = "${each.key}: ${each.value}"
+    name = "${each.key}: ${each.value}"
   }
 }

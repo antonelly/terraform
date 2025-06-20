@@ -21,26 +21,27 @@ variable "type" {
 }
 
 ####### OUTPUT VARIABLES
+
+# USANDO 'for_each' META-ARGUMENT
 output "instance_id" {
-  //value = aws_instance.meu_servidor[*].id
   value = [for b in aws_instance.meu_servidor : b.id]
 }
 
 output "public_ip" {
-  //value = aws_instance.meu_servidor[*].public_ip
-  value = [for b in aws_instance.meu_servidor : b.id]
+  value = [for b in aws_instance.meu_servidor : b.public_ip]
 }
 
-# UMA ABAIXO ESTA UMA FORMA DE FAZER DIFERENTE DA FORMA ACIMA
-#output "instance_id" {
-#  value = aws_instance.meu_servidor[*].id
-#}
-#
-#output "public_ip" {
-#  value = aws_instance.meu_servidor[*].public_ip
-#}
+/*
+# USANDO 'count' META-ARGUMENT
+output "instance_id" {
+  value = aws_instance.meu_servidor[*].id
+}
+
+output "public_ip" {
+  value = aws_instance.meu_servidor[*].public_ip
+}
 
 # Esse [*] -> se chama splat
-
+*/
 
 ###### LOCAL VARIABLES
